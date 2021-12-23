@@ -1,3 +1,42 @@
+# Component Design for monitor
+
+<StockListSearcher
+<Searchbox label Values (based on material UI)
+debounced with typeahead results
+
+- Selection adds to pinned stocks
+  />
+
+<PinnedStocksContainer> // responsible for loading the details of each pinned stock
+<Tiles>
+<Tile/> > -- max width set here in render
+<StockCurrentValue current delta> ->
+
+</StockTile>
+- remove, remove from pinned stocks
+
+Common Components
+
+<Section> - flex flow column, width 100%
+<Header><Value>
+</Section>
+<Tile>
+<Tiles> separator and flex flow to the left
+
+<Table>
+  Columns
+  values: [{}]
+</Table>
+
+Interaction design
+
+# Redux Design
+
+pinnedStocks: [symbol1, symbol2, symbol3]
+stockDetails: {
+stockSymbol: {currentValue, highValue, lowValue, name}
+}
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
