@@ -6,10 +6,11 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import { StockList } from "../types/StockTypes";
 
 type StockListSearchTypes = {
   /** options available for searching */
-  options: string[];
+  options: StockList;
   onSearch: (searchValue: string) => void;
   onSelect: (key: string) => void;
 };
@@ -25,7 +26,10 @@ const StockListSearch = ({
       <ComboboxPopover>
         <ComboboxList>
           {options.map((option) => (
-            <ComboboxOption key={option} value={option} />
+            <ComboboxOption
+              key={option.symbol}
+              value={option.symbol}
+            ></ComboboxOption>
           ))}
         </ComboboxList>
       </ComboboxPopover>

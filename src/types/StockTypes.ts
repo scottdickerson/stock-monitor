@@ -6,5 +6,16 @@ export interface Stock {
 export type StockList = Stock[];
 
 export type StockMonitorRedux = {
-  pinnedStocks: string[];
+  pinnedStocks: Stock[];
+  stockQuotes: {
+    data: Record<string, StockQuote>;
+  };
+};
+
+export type StockQuote = {
+  high: number;
+  low: number;
+  price: number;
+  changePercent: number;
+  symbol: string;
 };

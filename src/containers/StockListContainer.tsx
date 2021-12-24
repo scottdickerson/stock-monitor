@@ -11,28 +11,35 @@ const StockListContainer = () => {
 
   const dispatch = useDispatch();
 
+  // Debounce this fetch every 400 ms to stop killing the server
   useEffect(() => {
+    let debouncedSearchTimer: number;
     if (searchValue) {
-      fetchStockList(searchValue).then((fetchedStocks) =>
-        setStockList(fetchedStocks)
+      debouncedSearchTimer = window.setTimeout(
+        () =>
+          fetchStockList(searchValue).then((fetchedStocks) =>
+            setStockList(fetchedStocks)
+          ),
+        400
       );
     }
+    return () => clearTimeout(debouncedSearchTimer); // stop the search if they type again
   }, [searchValue]);
 
   const handleSearch = (searchString: string) => setSearchValue(searchString);
 
   const handleSelect = useCallback(
     (key) => {
-      dispatch(stockPinned(key));
+      dispatch(stockPinned(stockList.find((stock) => stock.symbol === key)));
     },
-    [dispatch]
+    [dispatch, stockList]
   );
 
   return (
     <StockListSearch
       onSearch={handleSearch}
       onSelect={handleSelect}
-      options={stockList.map((stock) => stock.symbol)}
+      options={stockList}
     />
   );
 };

@@ -1,7 +1,7 @@
 # Component Design for monitor
 
-<StockListSearcher
-<Searchbox label Values (based on material UI)
+<StockListSearch
+<Combobox label Values
 debounced with typeahead results
 
 - Selection adds to pinned stocks
@@ -33,7 +33,7 @@ Interaction design
 # Redux Design
 
 pinnedStocks: [symbol1, symbol2, symbol3]
-stockDetails: {
+stockQuotes: {
 stockSymbol: {currentValue, highValue, lowValue, name}
 }
 
