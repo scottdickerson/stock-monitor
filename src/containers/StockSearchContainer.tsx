@@ -48,6 +48,7 @@ const StockSearchContainer = () => {
 
   return (
     <StockSearch
+      disabled={pinnedStockSymbols.length >= 3}
       onSearch={handleSearch}
       onSelect={handleSelect}
       options={stockList}

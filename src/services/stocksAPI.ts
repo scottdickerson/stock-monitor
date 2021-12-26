@@ -16,18 +16,14 @@ export const fetchStockList = async (
     );
     return [];
   }
-  const mappedStockData = stockData.map((stock: Stock) =>
-    simplifyAPIResponse(stock)
-  );
-  console.log("mapped stock data", mappedStockData);
-  return mappedStockData;
+  return stockData.map((stock: Stock) => simplifyAPIResponse(stock));
 };
 
 export const fetchStockQuote = async (symbol: string): Promise<StockQuote> => {
   const { "Global Quote": stockQuote } = await fetch(
     `${STOCK_BASE_URL}function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`
   ).then((response) => response.json());
-  console.log("unmapped stock data", stockQuote);
+  console.log("unmapped stock quote", stockQuote);
   if (isNil(stockQuote)) {
     console.error(
       "cannot fetch stock data maybe you've exceeded the API calls. Should handle this better"

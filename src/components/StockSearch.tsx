@@ -14,12 +14,14 @@ type StockSearchTypes = {
   options: StockList;
   onSearch: (searchValue: string) => void;
   onSelect: (key: string) => void;
+  disabled?: boolean;
 };
 
 const StockSearch = ({
   options,
   onSearch,
   onSelect,
+  disabled = false,
 }: StockSearchTypes): JSX.Element => {
   return (
     <Combobox
@@ -27,7 +29,10 @@ const StockSearch = ({
       aria-labelledby="Search Stocks"
       onSelect={onSelect}
     >
-      <ComboboxInput onChange={(event) => onSearch(event.target.value)} />
+      <ComboboxInput
+        disabled={disabled}
+        onChange={(event) => onSearch(event.target.value)}
+      />
       <ComboboxPopover>
         <ComboboxList>
           {options.map((option) => (

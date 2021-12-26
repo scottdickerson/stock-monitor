@@ -1,6 +1,7 @@
 import { ReactComponent as ArrowDown } from "./arrow-down.svg";
 import { ReactComponent as ArrowUp } from "./arrow-up.svg";
 import { isNil } from "lodash";
+import { ReactComponent as CloseImage } from "./X.svg";
 import "./StockQuoteTile.css";
 
 type TileTypes = {
@@ -10,7 +11,12 @@ type TileTypes = {
 export const Tile = ({ children, onClose }: TileTypes) => {
   return (
     <div className="Tile">
-      {onClose ? <button onClick={onClose}>Close</button> : null}
+      {onClose ? (
+        <button aria-label="Close" onClick={onClose}>
+          <CloseImage />
+          Remove
+        </button>
+      ) : null}
       {children}
     </div>
   );
@@ -56,15 +62,15 @@ export const StockCurrentValue = ({
   return !isNil(trend) && !isNil(current) ? (
     <div className="StockQuote">
       {trend > 0 ? (
-        <ArrowUp className="ArrowUp" />
+        <ArrowUp title="Trend Up" className="ArrowUp" />
       ) : (
-        <ArrowDown className="ArrowDown" />
+        <ArrowDown title="Trend Down" className="ArrowDown" />
       )}
       <div className="CurrentValue">
         <span>{`$${current}`}</span>
-        <span className={trend > 0 ? "ArrowUp" : "ArrowDown"}>{`${trend.toFixed(
-          1
-        )}%`}</span>
+        <span className={trend > 0 ? "ArrowUp" : "ArrowDown"}>{`${Math.abs(
+          trend
+        ).toFixed(1)}%`}</span>
       </div>
     </div>
   ) : null;
@@ -75,7 +81,7 @@ type StockQuoteTileTypes = StockCurrentValueTypes & {
   symbol?: string;
   high?: number;
   low?: number;
-  onClose: (symbol: string) => void;
+  onClose?: (symbol: string) => void;
 };
 
 const StockQuoteTile = ({
@@ -88,7 +94,7 @@ const StockQuoteTile = ({
   onClose,
 }: StockQuoteTileTypes) => {
   return (
-    <Tile onClose={symbol ? () => onClose(symbol) : undefined}>
+    <Tile onClose={symbol && onClose ? () => onClose(symbol) : undefined}>
       <>
         <h2 className="Name">{name}</h2>
         {!isNil(current) ? (

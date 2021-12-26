@@ -45,4 +45,10 @@ describe("StockSearch", () => {
     userEvent.click(ibmOption);
     expect(commonProps.onSelect).toHaveBeenCalledWith("IBM");
   });
+  it("test disabled", () => {
+    render(<StockSearch {...commonProps} disabled options={mockOptions} />);
+    const searchInputField = screen.getByRole("combobox");
+    userEvent.type(searchInputField, "searchme");
+    expect(commonProps.onSearch).not.toHaveBeenCalledWith("searchme");
+  });
 });
