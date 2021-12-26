@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Stock } from "../types/StockTypes";
 
-const initialState: string[] = []; // will be a list of pinned stock symbols
+const initialState: Stock[] = []; // will be a list of pinned stock symbols
 const pinnedStockSlice = createSlice({
   name: "pinnedStocks",
   initialState,
@@ -9,7 +10,7 @@ const pinnedStockSlice = createSlice({
       state.push(action.payload);
     },
     stockUnpinned: (state, action) => {
-      return state.filter((stock) => stock !== action.payload); // remove the unpinned stock symbol
+      return state.filter((stock) => stock.symbol !== action.payload); // remove the unpinned stock symbol
     },
   },
 });

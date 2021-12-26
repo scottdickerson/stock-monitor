@@ -8,6 +8,7 @@ debounced with typeahead results
   />
 
 <PinnedStocksContainer> // responsible for loading the details of each pinned stock
+<StockQuoteContainer>
 <Tiles>
 <Tile/> > -- max width set here in render
 <StockCurrentValue current delta> ->
@@ -36,6 +37,8 @@ pinnedStocks: [symbol1, symbol2, symbol3]
 stockQuotes: {
 stockSymbol: {currentValue, highValue, lowValue, name}
 }
+
+Arrow by Cho Nix from NounProject.com
 
 # Getting Started with Create React App
 

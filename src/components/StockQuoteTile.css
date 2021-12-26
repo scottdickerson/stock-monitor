@@ -1,0 +1,47 @@
+.Tile {
+  min-width: 33%;
+  max-width: 33%;
+  display: flex;
+  flex-flow: column;
+  min-height: 30rem;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.Tile button {
+  align-self: flex-end;
+}
+
+.Tiles {
+  display: flex;
+  flex-flow: row;
+}
+
+.Tiles > .Tile + .Tile {
+  border-left: 1px solid black;
+}
+
+.ArrowUp {
+  fill: green;
+  color: green;
+}
+.ArrowDown {
+  fill: red;
+  color: red;
+}
+
+.ArrowUp,
+.ArrowDown {
+  height: 3rem;
+  width: 3rem;
+}
+
+.StockQuote {
+  display: flex;
+  flex-flow: row;
+}
+
+.CurrentValue {
+  display: flex;
+  flex-flow: column;
+}

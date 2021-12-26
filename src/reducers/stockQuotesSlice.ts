@@ -6,7 +6,7 @@ const initialState = { data: {} };
 export const getStockQuote = createAsyncThunk(
   "stockQuotes/fetchStockQuote",
   async (symbol: string) => {
-    return { ...fetchStockQuote(symbol) };
+    return fetchStockQuote(symbol);
   }
 );
 
