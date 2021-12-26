@@ -1,6 +1,6 @@
 # Component Design for monitor
 
-<StockListSearch
+<StockSearch
 <Combobox label Values
 debounced with typeahead results
 

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import StockListSearch from "../StockListSearch";
+import StockSearch from "../StockSearch";
 import userEvent from "@testing-library/user-event";
 
 const commonProps = {
@@ -10,31 +10,31 @@ const commonProps = {
 
 const mockOptions = [{ name: "International", symbol: "IBM" }];
 
-describe("StockListSearch", () => {
+describe("StockSearch", () => {
   afterEach(() => {
     commonProps.onSearch.mockReset();
     commonProps.onSelect.mockReset();
   });
   it("renders no options", () => {
-    render(<StockListSearch {...commonProps} />);
+    render(<StockSearch {...commonProps} />);
     expect(screen.getByRole("combobox")).toBeInTheDocument();
     // no options exist
     expect(screen.queryAllByRole("option")).toHaveLength(0);
   });
   it("renders options", () => {
-    render(<StockListSearch {...commonProps} options={mockOptions} />);
+    render(<StockSearch {...commonProps} options={mockOptions} />);
     expect(screen.getByRole("combobox")).toBeInTheDocument();
     // one options exist
     expect(screen.getByText("IBM")).toBeInTheDocument();
   });
   it("test typing callback", () => {
-    render(<StockListSearch {...commonProps} options={mockOptions} />);
+    render(<StockSearch {...commonProps} options={mockOptions} />);
     const searchInputField = screen.getByRole("combobox");
     userEvent.type(searchInputField, "searchme");
     expect(commonProps.onSearch).toHaveBeenCalledWith("searchme");
   });
   it("test selection callback", () => {
-    render(<StockListSearch {...commonProps} options={mockOptions} />);
+    render(<StockSearch {...commonProps} options={mockOptions} />);
     const searchInputField = screen.getByRole("combobox");
     userEvent.type(searchInputField, "IB");
 

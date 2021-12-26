@@ -1,12 +1,14 @@
 import React from "react";
 import "./App.css";
 import PinnedStockListContainer from "./containers/PinnedStockListContainer";
-import StockListContainer from "./containers/StockListContainer";
+import StockSearchContainer from "./containers/StockSearchContainer";
 
 function App() {
   return (
     <div className="App">
-      <StockListContainer />
+      <h1>Stock Comparison</h1>
+      <p>Enter up to 3 stocks to compare the current stock prices.</p>
+      <StockSearchContainer />
       <PinnedStockListContainer />
     </div>
   );

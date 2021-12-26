@@ -90,20 +90,22 @@ const StockQuoteTile = ({
   return (
     <Tile onClose={symbol ? () => onClose(symbol) : undefined}>
       <>
-        <h2>{name}</h2>
+        <h2 className="Name">{name}</h2>
         {!isNil(current) ? (
-          <StockCurrentValue current={current} trend={trend} />
+          <>
+            <StockCurrentValue current={current} trend={trend} />
+            <h2>Stats</h2>
+            <Table
+              rows={[
+                { stat: "High", value: high?.toFixed(2) },
+                { stat: "Low", value: low?.toFixed(2) },
+              ]}
+              columns={["stat", "value"]}
+            />
+          </>
         ) : (
           "Loading..."
         )}
-        <h2>Stats</h2>
-        <Table
-          rows={[
-            { stat: "High", value: high?.toFixed(2) },
-            { stat: "Low", value: low?.toFixed(2) },
-          ]}
-          columns={["stat", "value"]}
-        />
       </>
     </Tile>
   );

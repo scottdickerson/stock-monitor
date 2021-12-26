@@ -1,6 +1,6 @@
 .Tile {
-  min-width: 33%;
-  max-width: 33%;
+  max-width: 28%;
+  min-width: 28%;
   display: flex;
   flex-flow: column;
   min-height: 30rem;
@@ -12,9 +12,14 @@
   align-self: flex-end;
 }
 
+.Tile .Name {
+  min-height: 6rem;
+}
+
 .Tiles {
   display: flex;
   flex-flow: row;
+  flex-wrap: wrap;
 }
 
 .Tiles > .Tile + .Tile {

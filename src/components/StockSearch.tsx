@@ -7,21 +7,26 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import { StockList } from "../types/StockTypes";
+import "./StockSearch.css";
 
-type StockListSearchTypes = {
+type StockSearchTypes = {
   /** options available for searching */
   options: StockList;
   onSearch: (searchValue: string) => void;
   onSelect: (key: string) => void;
 };
 
-const StockListSearch = ({
+const StockSearch = ({
   options,
   onSearch,
   onSelect,
-}: StockListSearchTypes): JSX.Element => {
+}: StockSearchTypes): JSX.Element => {
   return (
-    <Combobox aria-labelledby="Search Stocks" onSelect={onSelect}>
+    <Combobox
+      className="StockSearch"
+      aria-labelledby="Search Stocks"
+      onSelect={onSelect}
+    >
       <ComboboxInput onChange={(event) => onSearch(event.target.value)} />
       <ComboboxPopover>
         <ComboboxList>
@@ -37,4 +42,4 @@ const StockListSearch = ({
   );
 };
 
-export default StockListSearch;
+export default StockSearch;
