@@ -1,46 +1,52 @@
-# Component Design for monitor
+# Stock Monitor App
 
-<StockSearch
-<Combobox label Values
-debounced with typeahead results
+## Component Design
 
-- Selection adds to pinned stocks
-  />
+- StockSearch
 
-<PinnedStocksContainer> // responsible for loading the details of each pinned stock
-<StockQuoteContainer>
-<Tiles>
-<Tile/> > -- max width set here in render
-<StockCurrentValue current delta> ->
+  - Combobox debounced with typeahead results
+  - Selection adds to pinned stocks
 
-</StockTile>
-- remove, remove from pinned stocks
+- PinnedStocksContainer // responsible for keeping track of each pinned stock
+
+- StockQuoteContainer
+
+- StockQuoteTile
+- StockCurrentValue current delta
 
 Common Components
 
-<Section> - flex flow column, width 100%
-<Header><Value>
-</Section>
-<Tile>
-<Tiles> separator and flex flow to the left
+- Tiles -- separator and flex flow to the left
+- Tile -- max width set here in render
+- Table
+  - columns
+  - rows: [{}]
 
-<Table>
-  Columns
-  values: [{}]
-</Table>
+## Redux Design
 
-Interaction design
-
-# Redux Design
-
-pinnedStocks: [symbol1, symbol2, symbol3]
+```javascript
+pinnedStocks: [
+  {symbol, name},
+  ...
+]
 stockQuotes: {
-stockSymbol: {currentValue, highValue, lowValue, name}
+  data: {
+    [stockSymbol]: {currentValue, highValue, lowValue, name}
+  }
 }
+stockEarnings: {
+  data: {
+    [stockSymbol]: [...]
+  }
+}
+stockCashFlow: {
+  data: {
+    [stockSymbol]: [...]
+  }
+}
+```
 
-Arrow by Cho Nix from NounProject.com
-
-# Getting Started with Create React App
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

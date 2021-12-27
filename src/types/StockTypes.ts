@@ -10,6 +10,12 @@ export type StockMonitorRedux = {
   stockQuotes: {
     data: Record<string, StockQuote>;
   };
+  stockEarnings: {
+    data: Record<string, any>;
+  };
+  stockCashFlow: {
+    data: Record<string, any>;
+  };
 };
 
 export type StockQuote = {
@@ -18,4 +24,14 @@ export type StockQuote = {
   price: number;
   changePercent: number;
   symbol: string;
+};
+
+export type StockEarningAPI = {
+  fiscalDateEnding: string;
+  reportedEPS: string;
+};
+
+export type StockEarning = {
+  fiscalDateEnding: number;
+  reportedEPS: number;
 };

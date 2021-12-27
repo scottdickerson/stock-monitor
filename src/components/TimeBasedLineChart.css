@@ -1,0 +1,6 @@
+.TimeChart {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 600px;
+}

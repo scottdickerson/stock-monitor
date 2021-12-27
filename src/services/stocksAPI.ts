@@ -1,4 +1,10 @@
-import { StockList, Stock, StockQuote } from "../types/StockTypes";
+import {
+  StockList,
+  Stock,
+  StockQuote,
+  StockEarning,
+  StockEarningAPI,
+} from "../types/StockTypes";
 import { mapKeys, isNil } from "lodash";
 
 const STOCK_BASE_URL = "https://www.alphavantage.co/query?";
@@ -47,3 +53,24 @@ const simplifyAPIResponse = (stock: any): any =>
     // remove extra info and simplify object
     return key.replace(/^\d*\.\s/, "");
   });
+
+export const fetchEPS = async (symbol: string) => {
+  const annualEarnings = await fetch(
+    `${STOCK_BASE_URL}function=EARNINGS&symbol=${symbol}&apikey=${API_KEY}`
+  )
+    .then((response) => response.json())
+    .then((response) =>
+      response?.annualEarnings
+        .map((datapoint: StockEarningAPI) => ({
+          ...datapoint,
+          fiscalDateEnding: new Date(datapoint.fiscalDateEnding).getTime(),
+          reportedEPS: parseFloat(datapoint.reportedEPS),
+        }))
+        .sort(
+          (a: StockEarning, b: StockEarning) =>
+            a.fiscalDateEnding - b.fiscalDateEnding
+        )
+    );
+  console.log("annualEarnings", annualEarnings);
+  return annualEarnings;
+};

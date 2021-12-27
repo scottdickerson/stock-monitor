@@ -4,6 +4,8 @@ import StockQuoteContainer from "./StockQuoteContainer";
 import StockQuoteTile, { Tiles } from "../components/StockQuoteTile";
 import { useCallback } from "react";
 import { stockUnpinned } from "../reducers/pinnedStockSlice";
+import StockGraphContainer from "./StockGraphContainer";
+import TimeBasedLineChart from "../components/TimeBasedLineChart";
 
 const PinnedStockListContainer = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,11 @@ const PinnedStockListContainer = () => {
           </StockQuoteContainer>
         ))}
       </Tiles>
+      {pinnedStocks.length > 0 ? (
+        <StockGraphContainer stocks={pinnedStocks}>
+          <TimeBasedLineChart label="Earnings Per Share" />
+        </StockGraphContainer>
+      ) : null}
     </div>
   );
 };
