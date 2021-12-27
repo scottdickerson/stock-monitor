@@ -3,16 +3,16 @@ import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getStockEarnings } from "../reducers/stockEarningsSlice";
 
-type StockGraphContainerTypes = {
+type StockEarningsGraphContainerTypes = {
   stocks: StockList;
   children: React.ReactNode;
 };
 
 /** Loads stock earnings and cash flow for graphs */
-const StockGraphContainer = ({
+const StockEarningsGraphContainer = ({
   stocks,
   children,
-}: StockGraphContainerTypes) => {
+}: StockEarningsGraphContainerTypes) => {
   const dispatch = useDispatch();
   const earnings = useSelector(
     (state: StockMonitorRedux) => state.stockEarnings.data
@@ -21,8 +21,13 @@ const StockGraphContainer = ({
   console.log("earnings", earnings);
   useEffect(() => {
     // load each of the stocks earnings
-    stocks.forEach((stock) => dispatch(getStockEarnings(stock.symbol)));
-  }, [stocks, dispatch]);
+    stocks.forEach((stock) => {
+      // this is just a caching optimization because the API throttles at 5 per minute, don't load previous ones
+      if (!earnings?.[stock.symbol]) {
+        dispatch(getStockEarnings(stock.symbol));
+      }
+    });
+  }, [stocks, dispatch, earnings]);
 
   const chartData = useMemo(() => {
     return stocks.map((stock) => ({
@@ -40,4 +45,4 @@ const StockGraphContainer = ({
     : null;
 };
 
-export default StockGraphContainer;
+export default StockEarningsGraphContainer;

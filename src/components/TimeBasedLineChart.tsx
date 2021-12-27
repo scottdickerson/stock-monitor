@@ -61,6 +61,10 @@ const TimeBasedLineChart = ({
     () => normalizeChartData(data, xaxis, yaxis),
     [data, xaxis, yaxis]
   );
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
   return (
     <div className="TimeChart">
       <h2>{label}</h2>
@@ -76,8 +80,8 @@ const TimeBasedLineChart = ({
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={xaxis} />
-          <YAxis />
-          <Tooltip />
+          <YAxis tickFormatter={(value) => `${formatter.format(value)}`} />
+          <Tooltip formatter={(value: any) => `${formatter.format(value)}`} />
           <Legend />
           {data?.map((stock, index) => (
             <Line

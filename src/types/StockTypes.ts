@@ -13,7 +13,7 @@ export type StockMonitorRedux = {
   stockEarnings: {
     data: Record<string, any>;
   };
-  stockCashFlow: {
+  stockCashflow: {
     data: Record<string, any>;
   };
 };
@@ -34,4 +34,14 @@ export type StockEarningAPI = {
 export type StockEarning = {
   fiscalDateEnding: number;
   reportedEPS: number;
+};
+
+export type StockCashflowAPI = {
+  fiscalDateEnding: string;
+  operatingCashflow: string;
+};
+
+export type StockCashflow = {
+  fiscalDateEnding: number;
+  operatingCashflow: number;
 };

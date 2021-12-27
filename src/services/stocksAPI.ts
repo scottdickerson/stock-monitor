@@ -4,6 +4,8 @@ import {
   StockQuote,
   StockEarning,
   StockEarningAPI,
+  StockCashflowAPI,
+  StockCashflow,
 } from "../types/StockTypes";
 import { mapKeys, isNil } from "lodash";
 
@@ -73,4 +75,25 @@ export const fetchEPS = async (symbol: string) => {
     );
   console.log("annualEarnings", annualEarnings);
   return annualEarnings;
+};
+
+export const fetchCashflow = async (symbol: string) => {
+  const annualCashflow = await fetch(
+    `${STOCK_BASE_URL}function=CASH_FLOW&symbol=${symbol}&apikey=${API_KEY}`
+  )
+    .then((response) => response.json())
+    .then((response) =>
+      response?.annualReports
+        .map((datapoint: StockCashflowAPI) => ({
+          ...datapoint,
+          fiscalDateEnding: new Date(datapoint.fiscalDateEnding).getTime(),
+          operatingCashflow: parseFloat(datapoint.operatingCashflow),
+        }))
+        .sort(
+          (a: StockCashflow, b: StockCashflow) =>
+            a.fiscalDateEnding - b.fiscalDateEnding
+        )
+    );
+  console.log("annual Cash flow", annualCashflow);
+  return annualCashflow;
 };
